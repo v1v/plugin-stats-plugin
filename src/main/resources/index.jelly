@@ -1,0 +1,7 @@
+<div>
+  <span>
+    The
+    <a href="http://wiki.jenkins-ci.org/display/JENKINS/Plugin+Usage+Plugin">Plugin Usage Plugin</a>
+    lets you list your installed plugins and how many jobs are using them.
+  </span>
+</div>
