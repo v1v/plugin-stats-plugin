@@ -2,7 +2,6 @@ package org.jenkins.ci.plugins.pluginstats;
 
 import hudson.Extension;
 import hudson.PluginWrapper;
-import hudson.matrix.MatrixProject;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.Project;
@@ -125,7 +124,7 @@ public final class PluginStatsAction implements RootAction {
         }
     }
 
-    private void queryJob(Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
+    private void queryProject(Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
         if (job != null) {
             buildersParser(job, installedPluginSet);
             buildWrappersParser(job, installedPluginSet);
@@ -133,7 +132,7 @@ public final class PluginStatsAction implements RootAction {
             scmParser(job, installedPluginSet);
             propertiesParser(job, installedPluginSet);
         } else {
-            LOG.log(Level.INFO, "JOB is null");
+            LOG.log(Level.INFO, "PROJECT is null");
         }
     }
 
@@ -167,8 +166,8 @@ public final class PluginStatsAction implements RootAction {
 
         // Query Projects
         for (Project job : Hudson.getInstance().getAllItems(Project.class)) {
-            LOG.log(Level.INFO, "queryJob " + job);
-            queryJob(job, installedPluginSet);
+            LOG.log(Level.INFO, "queryProject " + job);
+            queryProject(job, installedPluginSet);
         }
 
         // TODO: <maven2-moduleset>
