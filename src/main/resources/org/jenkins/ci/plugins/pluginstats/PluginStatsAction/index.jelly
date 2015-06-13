@@ -66,6 +66,7 @@
            </f:block>
          </f:section>
        </f:form>
+     </j:if>
    </l:main-panel>
  </l:layout>
 </j:jelly>
