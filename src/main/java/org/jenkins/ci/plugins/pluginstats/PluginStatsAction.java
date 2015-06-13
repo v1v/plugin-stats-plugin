@@ -97,7 +97,7 @@ public final class PluginStatsAction implements RootAction {
             if (job.getProperties() !=null && job.getProperties().size() > 0){
                 Map<JobPropertyDescriptor,JobProperty> properties = job.getProperties();
                 for (Map.Entry<JobPropertyDescriptor,JobProperty> entry : properties.entrySet()) {
-                    LOG.log(Level.INFO, "getProperties " + entry.getKey() );
+                    LOG.log(Level.INFO, "getProperties " + addJob(job.getName(), job.getShortUrl(), entry.getKey().getClass(), installedPluginSet));
                 }
             }else {
                 LOG.log(Level.INFO, "getProperties is empty");
