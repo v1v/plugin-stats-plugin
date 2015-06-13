@@ -3,10 +3,7 @@ package org.jenkins.ci.plugins.pluginstats;
 import hudson.Extension;
 import hudson.PluginWrapper;
 import hudson.matrix.MatrixProject;
-import hudson.model.Descriptor;
-import hudson.model.Hudson;
-import hudson.model.Project;
-import hudson.model.RootAction;
+import hudson.model.*;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Publisher;
 import hudson.util.DescribableList;
@@ -20,6 +17,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,7 +59,7 @@ public final class PluginStatsAction implements RootAction {
            // Query Builders
             if (job.getBuilders() != null && job.getBuilders().size() > 0) {
                 for (int i = 0; i < job.getBuilders().size(); i++) {
-                    LOG.log(Level.INFO, "getBuilders " + addJob(job.getName(), job.getUrl(), job.getBuilders().get(i).getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getBuilders " + addJob(job.getName(), job.getShortUrl(), job.getBuilders().get(i).getClass(), installedPluginSet));
                 }
             } else {
                 LOG.log(Level.INFO, "getBuilders is empty");
@@ -72,7 +70,7 @@ public final class PluginStatsAction implements RootAction {
                 Iterator<BuildWrapper> buildWrapperIterator = wrappersList.iterator();
                 while (buildWrapperIterator.hasNext()) {
                     BuildWrapper buildWrapper = buildWrapperIterator.next();
-                    LOG.log(Level.INFO, "getBuildWrappers " + addJob(job.getName(), job.getUrl(), buildWrapper.getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getBuildWrappers " + addJob(job.getName(), job.getShortUrl(), buildWrapper.getClass(), installedPluginSet));
                 }
 
             } else {
@@ -84,23 +82,22 @@ public final class PluginStatsAction implements RootAction {
                 Iterator<Publisher> publisherIterator = publisherList.iterator();
                 while (publisherIterator.hasNext()) {
                     Publisher publisher = publisherIterator.next();
-                    LOG.log(Level.INFO, "getPublishersList " + addJob(job.getName(), job.getUrl(), publisher.getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getPublishersList " + addJob(job.getName(), job.getShortUrl(), publisher.getClass(), installedPluginSet));
                 }
             } else {
                 LOG.log(Level.INFO, "getPublishersList is empty");
             }
 
             if (job.getScm() != null) {
-                LOG.log(Level.INFO, "getScm " + addJob(job.getName(), job.getUrl(), job.getScm().getClass(), installedPluginSet));
+                LOG.log(Level.INFO, "getScm " + addJob(job.getName(), job.getShortUrl(), job.getScm().getClass(), installedPluginSet));
             } else {
                 LOG.log(Level.INFO, "getScm is empty");
             }
 
-            // TODO: Query Properties
             if (job.getProperties() !=null && job.getProperties().size() > 0){
-                LOG.log(Level.INFO, "getProperties is " + job.getProperties().size());
-                for (int j = 0; j < job.getProperties().size(); j++) {
-                    LOG.log(Level.INFO, "getProperties " +job.getProperties().get(j));//+ /+ addJob(job, job.getProperties().get(j).getClass(), installedPluginSet));
+                Map<JobPropertyDescriptor,JobProperty> properties = job.getProperties();
+                for (Map.Entry<JobPropertyDescriptor,JobProperty> entry : properties.entrySet()) {
+                    LOG.log(Level.INFO, "getProperties " + entry.getKey() );
                 }
             }else {
                 LOG.log(Level.INFO, "getProperties is empty");
@@ -115,7 +112,7 @@ public final class PluginStatsAction implements RootAction {
         if (job != null) {
             if (job.getBuilders() != null && job.getBuilders().size() > 0) {
                 for (int i = 0; i < job.getBuilders().size(); i++) {
-                    LOG.log(Level.INFO, "getBuilders " + addJob(job.getName(), job.getUrl(), job.getBuilders().get(i).getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getBuilders " + addJob(job.getName(), job.getShortUrl(), job.getBuilders().get(i).getClass(), installedPluginSet));
                 }
             } else {
                 LOG.log(Level.INFO, "getBuilders is empty");
@@ -126,7 +123,7 @@ public final class PluginStatsAction implements RootAction {
                 Iterator<BuildWrapper> buildWrapperIterator = wrappersList.iterator();
                 while (buildWrapperIterator.hasNext()) {
                     BuildWrapper buildWrapper = buildWrapperIterator.next();
-                    LOG.log(Level.INFO, "getBuildWrappers " + addJob(job.getName(), job.getUrl(), buildWrapper.getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getBuildWrappers " + addJob(job.getName(), job.getShortUrl(), buildWrapper.getClass(), installedPluginSet));
                 }
 
             } else {
@@ -138,14 +135,14 @@ public final class PluginStatsAction implements RootAction {
                 Iterator<Publisher> publisherIterator = publisherList.iterator();
                 while (publisherIterator.hasNext()) {
                     Publisher publisher = publisherIterator.next();
-                    LOG.log(Level.INFO, "getPublishersList " + addJob(job.getName(), job.getUrl(), publisher.getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getPublishersList " + addJob(job.getName(), job.getShortUrl(), publisher.getClass(), installedPluginSet));
                 }
             } else {
                 LOG.log(Level.INFO, "getPublishersList is empty");
             }
 
             if (job.getScm() != null) {
-                LOG.log(Level.INFO, "getScm " + addJob(job.getName(), job.getUrl(), job.getScm().getClass(), installedPluginSet));
+                LOG.log(Level.INFO, "getScm " + addJob(job.getName(), job.getShortUrl(), job.getScm().getClass(), installedPluginSet));
             } else {
                 LOG.log(Level.INFO, "getScm is empty");
             }
