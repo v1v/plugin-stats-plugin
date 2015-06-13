@@ -1,0 +1,17 @@
+Started by user anonymous
+[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson8553801076951464912.sh
++ '[' '!' -e project-config ']'
++ cd project-config/jenkins/jobs
++ jenkins-jobs test akanda.yaml
+Traceback (most recent call last):
+  File "/usr/local/bin/jenkins-jobs", line 6, in <module>
+    from jenkins_jobs.cmd import main
+  File "/Library/Python/2.7/site-packages/jenkins_jobs/cmd.py", line 26, in <module>
+    from jenkins_jobs.builder import Builder
+  File "/Library/Python/2.7/site-packages/jenkins_jobs/builder.py", line 27, in <module>
+    import jenkins
+  File "/Library/Python/2.7/site-packages/jenkins/__init__.py", line 54, in <module>
+    from six.moves.http_client import BadStatusLine
+ImportError: No module named http_client
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

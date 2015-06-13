@@ -1,0 +1,8 @@
+Started by user anonymous
+[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson8451427190377740310.sh
++ '[' '!' -e project-config ']'
++ cd project-config/jenkins/jobs
++ jenkins-jobs test akanda.yaml
+/var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson8451427190377740310.sh: line 6: jenkins-jobs: command not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

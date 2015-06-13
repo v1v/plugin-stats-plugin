@@ -1,0 +1,7 @@
+Started by user anonymous
+[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson8042961761107480484.sh
++ git clone https://git.openstack.org/cgit/openstack-infra/project-config --depth 1
+Cloning into 'project-config'...
+fatal: repository 'https://git.openstack.org/cgit/openstack-infra/project-config/' not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

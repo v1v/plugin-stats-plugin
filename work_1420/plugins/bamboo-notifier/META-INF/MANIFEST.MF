@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: ANilsen
+Build-Jdk: 1.6.0_20
+Extension-Name: bamboo-notifier
+Implementation-Title: bamboo-notifier
+Implementation-Version: 1.1
+Short-Name: bamboo-notifier
+Long-Name: Bamboo Notifier
+Url: http://wiki.hudson-ci.org/display/HUDSON/Bamboo+Notifier
+Plugin-Version: 1.1
+Hudson-Version: 1.355
+Plugin-Developers: Asgeir Storesund Nilsen:asgeirn:asgeir@twingine.no
+

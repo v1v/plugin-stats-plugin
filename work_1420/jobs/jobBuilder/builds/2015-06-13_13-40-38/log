@@ -1,0 +1,16 @@
+Started by user anonymous
+[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson9215380431390250569.sh
++ '[' '!' -e project-config ']'
++ cd project-config/jenkins/jobs
++ jenkins-jobs update akanda.yaml
+Traceback (most recent call last):
+  File "/usr/local/bin/jenkins-jobs", line 10, in <module>
+    sys.exit(main())
+  File "/Library/Python/2.7/site-packages/jenkins_jobs/cmd.py", line 172, in main
+    config = setup_config_settings(options)
+  File "/Library/Python/2.7/site-packages/jenkins_jobs/cmd.py", line 199, in setup_config_settings
+    "\n{0} is not a valid .ini file".format(conf))
+jenkins_jobs.errors.JenkinsJobsException: A valid configuration file is required when not run as a test
+/etc/jenkins_jobs/jenkins_jobs.ini is not a valid .ini file
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

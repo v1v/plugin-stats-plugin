@@ -1,0 +1,5 @@
+Started by user anonymous
+[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson5549479126168919957.sh
++ git clone https://git.openstack.org/openstack-infra/project-config --depth 1
+Cloning into 'project-config'...
+Finished: SUCCESS

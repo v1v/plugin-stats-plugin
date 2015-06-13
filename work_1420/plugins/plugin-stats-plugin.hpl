@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Group-Id: org.jenkins-ci.plugins
+Short-Name: plugin-stats-plugin
+Long-Name: Plugin Stats Plugin
+Url: http://wiki.jenkins-ci.org/display/JENKINS/Plugin+Stats+Plugin
+Plugin-Version: 0.0.1
+Hudson-Version: 1.520
+Jenkins-Version: 1.520
+Plugin-Dependencies: ui-samples-plugin:1.520
+Plugin-Developers: Victor Martinez:v1v:VictorMartinezRubio@gmail.com
+Libraries: /Users/victor.martinez/Workspaces/github/v1v/plugin-stats-p
+ lugin/target/classes
+Resource-Path: /Users/victor.martinez/Workspaces/github/v1v/plugin-sta
+ ts-plugin/src/main/webapp
+

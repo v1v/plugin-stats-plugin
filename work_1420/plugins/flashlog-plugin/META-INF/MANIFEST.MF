@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: ddascal
+Build-Jdk: 1.6.0_20
+Extension-Name: flashlog-plugin
+Specification-Title: Hudson plugin which allows you to capture the fla
+ sh logs during a build. This is useful to debug unit        tests or 
+ integration tests.
+Implementation-Title: flashlog-plugin
+Implementation-Version: 1.0
+Group-Id: org.jvnet.hudson.plugins
+Short-Name: flashlog-plugin
+Long-Name: Hudson FlashLog Plugin
+Url: http://wiki.hudson-ci.org/display/HUDSON/FlashLog+Plugin
+Plugin-Version: 1.0
+Hudson-Version: 1.392
+Plugin-Developers: Dragos Dascalita Haut:ddragosd:ddragosd@gmail.com
+
