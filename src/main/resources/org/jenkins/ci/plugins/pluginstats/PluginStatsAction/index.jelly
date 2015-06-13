@@ -4,6 +4,7 @@
   <l:layout norefresh="true" permission="${permission}" title="${%Plugin.Stats.Plugin.Title}">
     <st:include page="/hudson/model/View/sidepanel.jelly" />
     <l:main-panel>
+      <j:set var="count" value="0"/>
       <style>
         table.pluginStatsAction { /* width: 100%; */ }
         table.pluginStatsAction th { font-weight: bold; text-align: left; }
@@ -28,7 +29,7 @@
         <f:form name="clear" action="clear" method="post">
           <f:section title="${%Plugin.Stats.Plugin.Clear.Title} (${it.levelType})">
             <f:block>
-              <table class="pluginStatsAction" cellpadding="3" cellspacing="3">
+              <table class="sortable pane bigtable" id="pluginStatsAction">
                 <thead>
                   <tr>
                     <th>Plugin Name</th>
@@ -40,7 +41,7 @@
                     <!--TODO th>% of Usage</th-->
                   </tr>
                 </thead>
-                <tbody id="pluginStatsActionTableBody">
+                <tbody id="pluginStatsActionBody">
                   <j:forEach var="plugin" items="${it.installedPluginSet.elements()}">
                     <tr>
                       <td><a target="_blank" href="${plugin.url}">${plugin.name}</a></td>
@@ -52,7 +53,14 @@
                         <td>Global Plugin</td>
                       </j:if>
                       <j:if test="${it.jobsAvailable}">
-                        <td>List of Jobs</td>
+                        <td>
+                          <ul id="ulID${count}">
+                            <j:forEach var="job" items="${plugin.jobSet}">
+                              <li><a href="${job.url}">${job.name}</a></li>
+                            </j:forEach>
+                          </ul>
+                          <j:set var="count" value="${count+1}"/>
+                        </td>
                       </j:if>
                       <!--TODO td>${plugin.Percentage} %</td-->
                    </tr>
