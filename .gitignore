@@ -4,3 +4,4 @@
 target/
 work*/
 jenkins.war
+.idea/
