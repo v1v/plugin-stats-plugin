@@ -103,6 +103,14 @@ public final class PluginStatsAction implements RootAction {
                 LOG.log(Level.INFO, "getProperties is empty");
             }
 
+            if (job.getAllActions() != null && job.getAllActions().size() > 0) {
+                for (Action action : job.getAllActions()) {
+                    LOG.log(Level.INFO, "getAllActions " + addJob(job.getName(), job.getShortUrl(), action.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.INFO, "getAllActions is empty");
+            }
+
         } else {
             LOG.log(Level.INFO, "PROJECT is null");
         }
@@ -155,6 +163,14 @@ public final class PluginStatsAction implements RootAction {
                 }
             }else {
                 LOG.log(Level.INFO, "getProperties is empty");
+            }
+
+            if (job.getAllActions() != null && job.getAllActions().size() > 0) {
+                for (Action action : job.getAllActions()) {
+                    LOG.log(Level.INFO, "getAllActions " + addJob(job.getName(), job.getShortUrl(), action.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.INFO, "getAllActions is empty");
             }
 
         } else {
