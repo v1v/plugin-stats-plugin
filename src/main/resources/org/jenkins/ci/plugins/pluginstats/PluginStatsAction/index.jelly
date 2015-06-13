@@ -5,11 +5,7 @@
     <st:include page="/hudson/model/View/sidepanel.jelly" />
     <l:main-panel>
       <j:set var="count" value="0"/>
-      <style>
-        table.pluginStatsAction { /* width: 100%; */ }
-        table.pluginStatsAction th { font-weight: bold; text-align: left; }
-        table.pluginStatsAction td { text-align: left; }
-      </style>
+      <j:set var="data" value="${it.data}"/>
       <h1>${%Plugin.Stats.Plugin.Title}</h1>
       <h2>${%Plugin.Stats.Plugin.Description}</h2>
       <br/>

@@ -198,6 +198,12 @@ public final class PluginStatsAction implements RootAction {
         response.forwardToPreviousPage(request);
         levelType = request.getParameter("levelType");
         LOG.log(Level.INFO, "doQuery " + levelType);
+        getData();
+    }
+
+    public void getData() {
+        installedPluginSet.clear();
+        LOG.log(Level.INFO, "getData ");
 
         // Global Statistics
         numberOfInstalledPlugins = Hudson.getInstance().getPluginManager().getPlugins().size();
@@ -217,9 +223,6 @@ public final class PluginStatsAction implements RootAction {
             LOG.log(Level.INFO, "queryJob " + job);
             queryMatrixProject(job, installedPluginSet);
         }
-
-        // TODO: <maven2-moduleset>
-
     }
 
     public String getDisplayName() {
