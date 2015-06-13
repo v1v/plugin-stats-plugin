@@ -4,25 +4,21 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 public final class InstalledPlugin implements Comparable<InstalledPlugin> {
+    private final SortedSet<Job> jobSet = new TreeSet<Job>();
     private String name;
     private String url;
     private String version;
     private String absolutePath;
-    private String folderName;
     private boolean globalConfigBased;
-    private final SortedSet<Job> jobSet = new TreeSet<Job>();
-
     // I don't like it ... but
     private int numberOfTotalJobs;
 
     public InstalledPlugin(final String name, final String url, final String version,
-                           final String folderName, final boolean globalConfigBased,
-                           final int numberOfTotalJobs) {
+                           final boolean globalConfigBased, final int numberOfTotalJobs) {
         super();
         this.name = name;
         this.url = url;
         this.version = version;
-        this.folderName = folderName;
         this.globalConfigBased = globalConfigBased;
         this.numberOfTotalJobs = numberOfTotalJobs;
     }
@@ -59,20 +55,12 @@ public final class InstalledPlugin implements Comparable<InstalledPlugin> {
         this.version = version;
     }
 
-    public void setGlobalConfigBased(final boolean globalConfigBased) {
-        this.globalConfigBased = globalConfigBased;
-    }
-
     public boolean isGlobalConfigBased() {
         return globalConfigBased;
     }
 
-    public String getFolderName() {
-        return folderName;
-    }
-
-    public void setFolderName(final String folderName) {
-        this.folderName = folderName;
+    public void setGlobalConfigBased(final boolean globalConfigBased) {
+        this.globalConfigBased = globalConfigBased;
     }
 
     public SortedSet<Job> getJobSet() {

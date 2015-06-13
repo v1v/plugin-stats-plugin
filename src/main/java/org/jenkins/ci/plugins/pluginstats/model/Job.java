@@ -1,8 +1,5 @@
 package org.jenkins.ci.plugins.pluginstats.model;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
-
 public final class Job implements Comparable<Job> {
     private String name;
     private String url;

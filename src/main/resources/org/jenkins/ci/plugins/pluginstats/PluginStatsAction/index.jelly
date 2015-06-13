@@ -18,7 +18,6 @@
             <select name="levelType">
               <option value="generic">Generic</option>
               <option value="jobs">Jobs</option>
-              <option value="builds">Builds</option>
             </select>
           </f:entry>
           <input type="submit" value="${%Plugin.Stats.Plugin.Query.Submit.Name}" />
@@ -34,16 +33,11 @@
                   <tr>
                     <th>Plugin Name</th>
                     <th>Version</th>
-                    <th>Folder Name</th>
                     <th>Number of Jobs</th>
                     <j:if test="${it.jobsAvailable}">
                       <th>List of Jobs</th>
                     </j:if>
-                    <th>Number of Builds</th>
-                    <j:if test="${it.buildsAvailable}">
-                      <th>List of Builds</th>
-                    </j:if>
-                    <th>% of Usage</th>
+                    <!--TODO th>% of Usage</th-->
                   </tr>
                 </thead>
                 <tbody id="pluginStatsActionTableBody">
@@ -51,7 +45,6 @@
                     <tr>
                       <td><a target="_blank" href="${plugin.url}">${plugin.name}</a></td>
                       <td>${plugin.version}</td>
-                      <td>${plugin.folderName}</td>
                       <j:if test="${plugin.globalConfigBased}">
                         <td>${plugin.jobSet.size()}</td>
                       </j:if>
@@ -61,22 +54,18 @@
                       <j:if test="${it.jobsAvailable}">
                         <td>List of Jobs</td>
                       </j:if>
-                      <td>0</td>
-                      <j:if test="${it.buildsAvailable}">
-                        <td>List of Builds</td>
-                      </j:if>
-                      <td>${plugin.getPercentage()} %</td>
-                    </tr>
-                  </j:forEach>
-                </tbody>
-              </table>
-            </f:block>
-            <f:block>
-              <input type="submit" value="${%Plugin.Stats.Plugin.Clear.Submit.Name}"/>
-            </f:block>
-          </f:section>
-        </f:form>
-      </j:if>
-    </l:main-panel>
-  </l:layout>
+                      <!--TODO td>${plugin.Percentage} %</td-->
+                   </tr>
+                 </j:forEach>
+               </tbody>
+             </table>
+           </f:block>
+           <f:block>
+             <input type="submit" value="${%Plugin.Stats.Plugin.Clear.Submit.Name}"/>
+           </f:block>
+         </f:section>
+       </f:form>
+     </j:if>
+   </l:main-panel>
+ </l:layout>
 </j:jelly>
