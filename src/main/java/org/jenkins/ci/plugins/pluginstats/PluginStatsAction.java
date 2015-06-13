@@ -33,13 +33,6 @@ public final class PluginStatsAction implements RootAction {
 
     private String levelType;
 
-    public void doClear(final StaplerRequest request, final StaplerResponse response)
-            throws ServletException, IOException {
-        LOG.log(Level.INFO, "doClear");
-        installedPluginSet.clear();
-        response.sendRedirect(Hudson.getInstance().getRootUrl());
-    }
-
     private String addJob(String name, String url, Class<?> context, Hashtable<String, InstalledPlugin> installedPluginSet) {
         File plugin = new File(Utils.findPathJar(context));
         String pluginName = plugin.getName();

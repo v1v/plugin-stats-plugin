@@ -64,12 +64,8 @@
                </tbody>
              </table>
            </f:block>
-           <f:block>
-             <input type="submit" value="${%Plugin.Stats.Plugin.Clear.Submit.Name}"/>
-           </f:block>
          </f:section>
        </f:form>
-     </j:if>
    </l:main-panel>
  </l:layout>
 </j:jelly>
