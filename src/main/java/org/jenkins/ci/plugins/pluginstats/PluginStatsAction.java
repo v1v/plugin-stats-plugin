@@ -2,6 +2,7 @@ package org.jenkins.ci.plugins.pluginstats;
 
 import hudson.Extension;
 import hudson.PluginWrapper;
+import hudson.matrix.MatrixProject;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.Project;
@@ -41,13 +42,13 @@ public final class PluginStatsAction implements RootAction {
         response.sendRedirect(Hudson.getInstance().getRootUrl());
     }
 
-    private String addJob(Project job, Class<?> context, Hashtable<String, InstalledPlugin> installedPluginSet) {
+    private String addJob(String name, String url, Class<?> context, Hashtable<String, InstalledPlugin> installedPluginSet) {
         File plugin = new File(Utils.findPathJar(context));
         String pluginName = plugin.getName();
         if (installedPluginSet.containsKey(pluginName)) {
             LOG.log(Level.INFO, "<FOUND> " + pluginName);
             InstalledPlugin installedPlugin = installedPluginSet.get(pluginName);
-            installedPlugin.addJob(new org.jenkins.ci.plugins.pluginstats.model.Job(job.getName(), job.getUrl()));
+            installedPlugin.addJob(new org.jenkins.ci.plugins.pluginstats.model.Job(name, url));
             installedPluginSet.put(pluginName, installedPlugin);
         } else {
             LOG.log(Level.INFO, pluginName);
@@ -55,63 +56,46 @@ public final class PluginStatsAction implements RootAction {
         return pluginName;
     }
 
-    private void buildersParser (Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
+    private void queryProject(Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
         if (job != null) {
-            // Query Builders
+           // Query Builders
             if (job.getBuilders() != null && job.getBuilders().size() > 0) {
                 for (int i = 0; i < job.getBuilders().size(); i++) {
-                    LOG.log(Level.INFO, "getBuilders " + addJob(job, job.getBuilders().get(i).getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getBuilders " + addJob(job.getName(), job.getUrl(), job.getBuilders().get(i).getClass(), installedPluginSet));
                 }
             } else {
                 LOG.log(Level.INFO, "getBuilders is empty");
             }
-        }
-    }
-
-    private void buildWrappersParser (Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
-        if (job != null) {
 
             if (job.getBuildWrappersList() != null && job.getBuildWrappersList().size() > 0) {
                 DescribableList<BuildWrapper, Descriptor<BuildWrapper>> wrappersList = job.getBuildWrappersList();
                 Iterator<BuildWrapper> buildWrapperIterator = wrappersList.iterator();
                 while (buildWrapperIterator.hasNext()) {
                     BuildWrapper buildWrapper = buildWrapperIterator.next();
-                    LOG.log(Level.INFO, "getBuildWrappers " + addJob(job, buildWrapper.getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getBuildWrappers " + addJob(job.getName(), job.getUrl(), buildWrapper.getClass(), installedPluginSet));
                 }
 
             } else {
                 LOG.log(Level.INFO, "getBuildWrappers is empty");
             }
-        }
-    }
 
-    private void publishersParser (Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
-        if (job != null) {
             if (job.getPublishersList() != null && job.getPublishersList().size() > 0) {
                 DescribableList<Publisher, Descriptor<Publisher>> publisherList = job.getPublishersList();
                 Iterator<Publisher> publisherIterator = publisherList.iterator();
                 while (publisherIterator.hasNext()) {
                     Publisher publisher = publisherIterator.next();
-                    LOG.log(Level.INFO, "getPublishersList " + addJob(job, publisher.getClass(), installedPluginSet));
+                    LOG.log(Level.INFO, "getPublishersList " + addJob(job.getName(), job.getUrl(), publisher.getClass(), installedPluginSet));
                 }
             } else {
                 LOG.log(Level.INFO, "getPublishersList is empty");
             }
-        }
-    }
 
-    private void scmParser (Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
-        if (job != null) {
             if (job.getScm() != null) {
-                LOG.log(Level.INFO, "getScm " + addJob(job, job.getScm().getClass(), installedPluginSet));
+                LOG.log(Level.INFO, "getScm " + addJob(job.getName(), job.getUrl(), job.getScm().getClass(), installedPluginSet));
             } else {
                 LOG.log(Level.INFO, "getScm is empty");
             }
-        }
-    }
 
-    private void propertiesParser (Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
-        if (job != null) {
             // TODO: Query Properties
             if (job.getProperties() !=null && job.getProperties().size() > 0){
                 LOG.log(Level.INFO, "getProperties is " + job.getProperties().size());
@@ -121,16 +105,61 @@ public final class PluginStatsAction implements RootAction {
             }else {
                 LOG.log(Level.INFO, "getProperties is empty");
             }
+
+        } else {
+            LOG.log(Level.INFO, "PROJECT is null");
         }
     }
 
-    private void queryProject(Project job, Hashtable<String, InstalledPlugin> installedPluginSet) {
+    private void queryMatrixProject(MatrixProject job, Hashtable<String, InstalledPlugin> installedPluginSet) {
         if (job != null) {
-            buildersParser(job, installedPluginSet);
-            buildWrappersParser(job, installedPluginSet);
-            publishersParser(job, installedPluginSet);
-            scmParser(job, installedPluginSet);
-            propertiesParser(job, installedPluginSet);
+            if (job.getBuilders() != null && job.getBuilders().size() > 0) {
+                for (int i = 0; i < job.getBuilders().size(); i++) {
+                    LOG.log(Level.INFO, "getBuilders " + addJob(job.getName(), job.getUrl(), job.getBuilders().get(i).getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.INFO, "getBuilders is empty");
+            }
+
+            if (job.getBuildWrappersList() != null && job.getBuildWrappersList().size() > 0) {
+                DescribableList<BuildWrapper, Descriptor<BuildWrapper>> wrappersList = job.getBuildWrappersList();
+                Iterator<BuildWrapper> buildWrapperIterator = wrappersList.iterator();
+                while (buildWrapperIterator.hasNext()) {
+                    BuildWrapper buildWrapper = buildWrapperIterator.next();
+                    LOG.log(Level.INFO, "getBuildWrappers " + addJob(job.getName(), job.getUrl(), buildWrapper.getClass(), installedPluginSet));
+                }
+
+            } else {
+                LOG.log(Level.INFO, "getBuildWrappers is empty");
+            }
+
+            if (job.getPublishersList() != null && job.getPublishersList().size() > 0) {
+                DescribableList<Publisher, Descriptor<Publisher>> publisherList = job.getPublishersList();
+                Iterator<Publisher> publisherIterator = publisherList.iterator();
+                while (publisherIterator.hasNext()) {
+                    Publisher publisher = publisherIterator.next();
+                    LOG.log(Level.INFO, "getPublishersList " + addJob(job.getName(), job.getUrl(), publisher.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.INFO, "getPublishersList is empty");
+            }
+
+            if (job.getScm() != null) {
+                LOG.log(Level.INFO, "getScm " + addJob(job.getName(), job.getUrl(), job.getScm().getClass(), installedPluginSet));
+            } else {
+                LOG.log(Level.INFO, "getScm is empty");
+            }
+
+            // TODO: Query Properties
+            if (job.getProperties() !=null && job.getProperties().size() > 0){
+                LOG.log(Level.INFO, "getProperties is " + job.getProperties().size());
+                for (int j = 0; j < job.getProperties().size(); j++) {
+                    LOG.log(Level.INFO, "getProperties " +job.getProperties().get(j));//+ /+ addJob(job, job.getProperties().get(j).getClass(), installedPluginSet));
+                }
+            }else {
+                LOG.log(Level.INFO, "getProperties is empty");
+            }
+
         } else {
             LOG.log(Level.INFO, "PROJECT is null");
         }
@@ -170,8 +199,13 @@ public final class PluginStatsAction implements RootAction {
             queryProject(job, installedPluginSet);
         }
 
+        // Query MatrixProjects
+        for (MatrixProject job : Hudson.getInstance().getAllItems(MatrixProject.class)) {
+            LOG.log(Level.INFO, "queryJob " + job);
+            queryMatrixProject(job, installedPluginSet);
+        }
+
         // TODO: <maven2-moduleset>
-        // TODO: <matrix-project>
 
     }
 
