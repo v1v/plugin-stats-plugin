@@ -2,7 +2,7 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <j:getStatic var="permission" className="hudson.model.Item" field="CREATE"/>
   <l:layout norefresh="true" permission="${permission}" title="${%Plugin.Stats.Plugin.Title}">
-    <st:include page="/hudson/model/View/sidepanel.jelly" />
+    <st:include it="${app}" page="sidepanel.jelly"/>
     <l:main-panel>
       <j:set var="data" value="${it.data}"/>
       <h1>${%Plugin.Stats.Plugin.Title}</h1>
