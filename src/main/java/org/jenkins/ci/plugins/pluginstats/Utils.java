@@ -13,16 +13,20 @@ public class Utils {
     public static String findPathJar(Class<?> context) throws IllegalStateException {
         URL location = context.getResource('/' + context.getName().replace(".", "/") + ".class");
         String jarPath = location.getPath();
+        String findPath = "";
         if (jarPath != null && !jarPath.equals("")) {
             try {
-                return jarPath.substring("file:".length(), jarPath.lastIndexOf("!")).replaceAll("/WEB-INF.*", "");
+                findPath = jarPath.substring("file:".length(), jarPath.lastIndexOf("!")).replaceAll("/WEB-INF.*", "");
             } catch (java.lang.StringIndexOutOfBoundsException e) {
                 // it is based on class
                 LOG.log(Level.WARNING, "Cannot be converted '" + context.getName() + "' (" + jarPath + ")");
-                return jarPath.substring("file:".length(), jarPath.lastIndexOf("/WEB-INF"));
+                findPath = jarPath.substring("file:".length(), jarPath.lastIndexOf("/WEB-INF"));
+            } finally {
+                LOG.log(Level.FINEST, "findPathJar '" + context.getName() + "' (" + jarPath + ")" + "[" + findPath + "]");
+                return findPath;
             }
         } else {
-            return "";
+            return findPath;
         }
     }
 }
