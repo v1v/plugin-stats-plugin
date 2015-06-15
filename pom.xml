@@ -11,7 +11,7 @@
   </parent>
 
   <artifactId>plugin-stats-plugin</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <packaging>hpi</packaging>
 
   <name>Plugin Stats Plugin</name>
