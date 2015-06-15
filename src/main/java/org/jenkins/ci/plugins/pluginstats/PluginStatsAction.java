@@ -92,10 +92,10 @@ public final class PluginStatsAction implements RootAction {
 
             if (job.getAllActions() != null && job.getAllActions().size() > 0) {
                 for (Action action : job.getAllActions()) {
-                    LOG.log(Level.INFO, "getAllActions " + addJob(job.getName(), job.getShortUrl(), action.getClass(), installedPluginSet));
+                    LOG.log(Level.FINE, "getAllActions " + addJob(job.getName(), job.getShortUrl(), action.getClass(), installedPluginSet));
                 }
             } else {
-                LOG.log(Level.INFO, "getAllActions is empty");
+                LOG.log(Level.FINE, "getAllActions is empty");
             }
 
         } else {
@@ -144,7 +144,7 @@ public final class PluginStatsAction implements RootAction {
 
             // TODO: Query Properties
             if (job.getProperties() !=null && job.getProperties().size() > 0){
-                LOG.log(Level.INFO, "getProperties is " + job.getProperties().size());
+                LOG.log(Level.FINE, "getProperties is " + job.getProperties().size());
                 for (int j = 0; j < job.getProperties().size(); j++) {
                     LOG.log(Level.FINE, "getProperties " +job.getProperties().get(j));//+ /+ addJob(job, job.getProperties().get(j).getClass(), installedPluginSet));
                 }
