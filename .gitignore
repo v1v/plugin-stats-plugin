@@ -5,3 +5,4 @@ target/
 work*/
 jenkins.war
 .idea/
+*.iml
