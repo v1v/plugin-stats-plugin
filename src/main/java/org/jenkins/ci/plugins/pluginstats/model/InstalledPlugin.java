@@ -75,9 +75,9 @@ public final class InstalledPlugin implements Comparable<InstalledPlugin> {
         return jobSet.size() > 0;
     }
 
-    public double getPercentage() {
+    public float getPercentage() {
         if (numberOfTotalJobs > 0 && jobSet != null) {
-            return ((jobSet.size() / numberOfTotalJobs) * 100);
+            return ((jobSet.size() * 100 / numberOfTotalJobs));
         } else {
             return 0;
         }
