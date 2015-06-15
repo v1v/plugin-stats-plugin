@@ -12,7 +12,5 @@ There is already another similar plugin but it's based on Extensions.
 TODO
 ----
 - Job types: maven2-moduleset and FeatureBranch
-- Remove query action
-- Job url is broken
 - Disable Plugin from Table
 - Classify plugins type
