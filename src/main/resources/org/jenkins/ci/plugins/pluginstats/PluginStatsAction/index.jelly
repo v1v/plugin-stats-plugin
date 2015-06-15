@@ -38,7 +38,7 @@
                         <td>
                           <table id="jobList">
                             <j:forEach var="job" items="${plugin.jobSet}">
-                                <tr><td><a href="${job.url}">${job.name}</a></td></tr>
+                                <tr><td><a href="${app.rootUrl}${job.url}">${job.name}</a></td></tr>
                             </j:forEach>
                          </table>
                           <j:set var="count" value="${count+1}"/>
