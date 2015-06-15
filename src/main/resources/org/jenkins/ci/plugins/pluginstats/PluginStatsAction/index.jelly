@@ -4,33 +4,14 @@
   <l:layout norefresh="true" permission="${permission}" title="${%Plugin.Stats.Plugin.Title}">
     <st:include page="/hudson/model/View/sidepanel.jelly" />
     <l:main-panel>
-      <j:set var="count" value="0"/>
       <j:set var="data" value="${it.data}"/>
-      <style>
-        table.pluginStatsAction { /* width: 100%; */ }
-        table.pluginStatsAction th { font-weight: bold; text-align: left; }
-        table.pluginStatsAction td { text-align: left; }
-      </style>
       <h1>${%Plugin.Stats.Plugin.Title}</h1>
-      <h2>${%Plugin.Stats.Plugin.Description}</h2>
-      <br/>
-      <f:form name="query" action="query" method="get">
-        <f:block>
-          <f:entry name="levelType" title="Choose Level Type" field="levelType">
-            <select name="levelType">
-              <option value="generic">Generic</option>
-              <option value="jobs">Jobs</option>
-            </select>
-          </f:entry>
-          <input type="submit" value="${%Plugin.Stats.Plugin.Query.Submit.Name}" />
-        </f:block>
-      </f:form>
+      <h3>${%Plugin.Stats.Plugin.Description}</h3>
       <j:if test="${it.pluginsAvailable}">
         <br/>
         <f:form name="clear" action="clear" method="post">
-          <f:section title="${%Plugin.Stats.Plugin.Clear.Title} (${it.levelType})">
             <f:block>
-              <table class="sortable pane bigtable" id="pluginStatsAction">
+              <table class="sortable pane bigtable" border="solid #bbb;" id="pluginStatsAction">
                 <thead>
                   <tr>
                     <th>Plugin Name</th>
@@ -39,7 +20,7 @@
                     <j:if test="${it.jobsAvailable}">
                       <th>List of Jobs</th>
                     </j:if>
-                    <!--TODO th>% of Usage</th-->
+                    <th>% of Usage</th>
                   </tr>
                 </thead>
                 <tbody id="pluginStatsActionBody">
@@ -55,21 +36,20 @@
                       </j:if>
                       <j:if test="${it.jobsAvailable}">
                         <td>
-                          <ul id="ulID${count}">
+                          <table id="jobList">
                             <j:forEach var="job" items="${plugin.jobSet}">
-                              <li><a href="${job.url}">${job.name}</a></li>
+                                <tr><td><a href="${job.url}">${job.name}</a></td></tr>
                             </j:forEach>
-                          </ul>
+                         </table>
                           <j:set var="count" value="${count+1}"/>
                         </td>
                       </j:if>
-                      <!--TODO td>${plugin.Percentage} %</td-->
+                      <td>${plugin.getPercentage()} %</td>
                    </tr>
                  </j:forEach>
                </tbody>
              </table>
            </f:block>
-         </f:section>
        </f:form>
      </j:if>
    </l:main-panel>
