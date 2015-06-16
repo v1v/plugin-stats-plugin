@@ -5,7 +5,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by victor.martinez on 13/06/15.
+ * Utils class.
+ * @author Victor Martinez
  */
 public class Utils {
     private static final Logger LOG = Logger.getLogger(Utils.class.getName());

@@ -3,6 +3,10 @@ package org.jenkins.ci.plugins.pluginstats.model;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Installed Plugin class.
+ * @author Victor Martinez
+ */
 public final class InstalledPlugin implements Comparable<InstalledPlugin> {
     private final SortedSet<Job> jobSet = new TreeSet<Job>();
     private String name;

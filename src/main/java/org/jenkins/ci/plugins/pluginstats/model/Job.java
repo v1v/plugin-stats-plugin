@@ -1,5 +1,9 @@
 package org.jenkins.ci.plugins.pluginstats.model;
 
+/**
+ * Job class.
+ * @author Victor Martinez
+ */
 public final class Job implements Comparable<Job> {
     private String name;
     private String url;

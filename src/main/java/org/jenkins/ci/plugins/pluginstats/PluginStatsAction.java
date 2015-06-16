@@ -18,6 +18,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Add the plugin stats link to the Jenkins Sidebar.
+ * @author Victor Martinez
+ */
 @Extension
 public final class PluginStatsAction implements RootAction {
 
