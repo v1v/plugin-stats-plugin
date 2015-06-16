@@ -7,11 +7,10 @@
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
     <version>1.554.1</version>
-    <!--version>1.532</version-->
   </parent>
 
   <artifactId>plugin-stats-plugin</artifactId>
-  <version>0.0.2</version>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
   <name>Plugin Stats Plugin</name>
@@ -56,5 +55,4 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <!-- TODO: MavenModuleSet -->
 </project>
