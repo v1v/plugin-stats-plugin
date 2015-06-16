@@ -7,6 +7,7 @@ import hudson.model.*;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Publisher;
 import hudson.util.DescribableList;
+import jenkins.model.Jenkins;
 import org.jenkins.ci.plugins.pluginstats.model.InstalledPlugin;
 
 import java.io.File;
@@ -185,20 +186,20 @@ public final class PluginStatsAction implements RootAction {
         LOG.log(Level.FINE, "getData ");
 
         // Global Statistics
-        numberOfInstalledPlugins = Hudson.getInstance().getPluginManager().getPlugins().size();
-        numberOfJobs = Hudson.getInstance().getItems().size();
+        numberOfInstalledPlugins = Jenkins.getInstance().getPluginManager().getPlugins().size();
+        numberOfJobs = Jenkins.getInstance().getItems().size();
 
         // Query Plugins
-        installedPluginSet = generateInstalledPluginSet(Hudson.getInstance().getPluginManager().getPlugins(), numberOfJobs);
+        installedPluginSet = generateInstalledPluginSet(Jenkins.getInstance().getPluginManager().getPlugins(), numberOfJobs);
 
         // Query Projects
-        for (Project job : Hudson.getInstance().getAllItems(Project.class)) {
+        for (Project job : Jenkins.getInstance().getAllItems(Project.class)) {
             LOG.log(Level.FINE, "queryProject " + job);
             queryProject(job, installedPluginSet);
         }
 
         // Query MatrixProjects
-        for (MatrixProject job : Hudson.getInstance().getAllItems(MatrixProject.class)) {
+        for (MatrixProject job : Jenkins.getInstance().getAllItems(MatrixProject.class)) {
             LOG.log(Level.FINE, "queryJob " + job);
             queryMatrixProject(job, installedPluginSet);
         }
