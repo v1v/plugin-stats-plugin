@@ -7,10 +7,9 @@ See [Plugin Stats Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Plugin+Sta
 
 [![Build Status](https://buildhive.cloudbees.com/job/jenkinsci/job/plugin-stats-plugin/badge/icon)](https://buildhive.cloudbees.com/job/jenkinsci/job/plugin-stats-plugin/)
 
-There is already another similar plugin but it's based on Extensions.
-
 TODO
 ----
+
 - Job types: maven2-moduleset and FeatureBranch
 - Disable Plugin from Table
 - Classify plugins type
