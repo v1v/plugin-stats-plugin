@@ -1,8 +1,0 @@
-Started by user anonymous
-[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson7257379714799424054.sh
-+ '[' '!' -e project-config ']'
-+ cd project-config/jenkins/jobs
-+ jenkins-jobs test akanda.yaml
-INFO:jenkins_jobs.builder:Number of jobs generated:  0
-INFO:jenkins_jobs.builder:Cache saved
-Finished: SUCCESS

@@ -1,7 +1,0 @@
-Started by user anonymous
-[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson5052080461053512871.sh
-+ git clone https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins
-Cloning into 'jenkins'...
-fatal: https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/info/refs not valid: is this a git repository?
-Build step 'Execute shell' marked build as failure
-Finished: FAILURE

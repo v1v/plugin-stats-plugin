@@ -1,9 +1,0 @@
-Started by user anonymous
-[workspace] $ /bin/sh -xe /var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson8528714280934322275.sh
-+ '[' '!' -e project-config ']'
-+ cd project-config/jenkins/jobs
-+ cat
-+ '[job_builder]'
-/var/folders/2t/s41tzpwd4kl01jphcyhdf2xh0000gp/T/hudson8528714280934322275.sh: line 8: [job_builder]: command not found
-Build step 'Execute shell' marked build as failure
-Finished: FAILURE
