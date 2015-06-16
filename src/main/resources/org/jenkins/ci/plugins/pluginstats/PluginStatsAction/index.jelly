@@ -5,22 +5,24 @@
     <st:include it="${app}" page="sidepanel.jelly"/>
     <l:main-panel>
       <j:set var="data" value="${it.data}"/>
-      <h1>${%Plugin.Stats.Plugin.Title}</h1>
+        <h1>${%Plugin.Stats.Plugin.Title}</h1>
       <h3>${%Plugin.Stats.Plugin.Description}</h3>
       <j:if test="${it.pluginsAvailable}">
         <br/>
-        <f:form name="clear" action="clear" method="post">
+          <input type="button" name="exco" id="exco" value="Expand..." onclick="showHide(exco)"/>
+         <f:form name="clear" action="clear" method="post">
             <f:block>
-              <table class="sortable pane bigtable" border="solid #bbb;" id="pluginStatsAction">
+              <div class="clickable">
+                <table class="sortable pane bigtable" border="solid #bbb;" id="pluginStatsAction">
                 <thead>
                   <tr>
                     <th>Plugin Name</th>
                     <th>Version</th>
                     <th>Number of Jobs</th>
-                    <j:if test="${it.jobsAvailable}">
-                      <th>List of Jobs</th>
-                    </j:if>
                     <th>% of Usage</th>
+                    <j:if test="${it.jobsAvailable}">
+                          <th style="display:none" class="toHide">List of Jobs</th>
+                    </j:if>
                   </tr>
                 </thead>
                 <tbody id="pluginStatsActionBody">
@@ -34,24 +36,44 @@
                       <j:if test="${!plugin.globalConfigBased}">
                         <td>Global Plugin</td>
                       </j:if>
+                      <td>${plugin.getPercentage()} %</td>
                       <j:if test="${it.jobsAvailable}">
-                        <td>
+                          <j:set var="count" value="${count+1}"/>
+                          <td style="display:none" class="toHide">
                           <table id="jobList">
                             <j:forEach var="job" items="${plugin.jobSet}">
                                 <tr><td><a href="${app.rootUrl}${job.url}">${job.name}</a></td></tr>
                             </j:forEach>
                          </table>
-                          <j:set var="count" value="${count+1}"/>
                         </td>
                       </j:if>
-                      <td>${plugin.getPercentage()} %</td>
                    </tr>
                  </j:forEach>
                </tbody>
              </table>
+                </div>
            </f:block>
        </f:form>
      </j:if>
    </l:main-panel>
  </l:layout>
+    <script>
+    function showHide(btn)
+    {
+        var elems = document.getElementsByClassName('toHide');
+        var i;
+        for (i in elems) {
+            if (elems[i].style.display == 'none')
+            {
+                elems[i].style.display = '';
+                btn.value='Collapse...';
+            }
+            else
+            {
+                elems[i].style.display = 'none';
+                btn.value='Expand...';
+            }
+        }
+    }
+    </script>
 </j:jelly>
