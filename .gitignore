@@ -3,6 +3,6 @@
 .settings/
 target/
 work*/
-jenkins.war
 .idea/
 *.iml
+plugin-stats-plugin.iml
