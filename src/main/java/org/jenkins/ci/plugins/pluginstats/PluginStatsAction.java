@@ -158,6 +158,16 @@ public final class PluginStatsAction implements RootAction {
                 LOG.log(Level.FINE, "getScm is empty");
             }
 
+            if (job.getTriggers() != null && job.getTriggers().size() > 0) {
+                Iterator<Trigger<?>> triggerIterator =  job.getTriggers().values().iterator();
+                while (triggerIterator.hasNext()) {
+                    Trigger trigger = triggerIterator.next();
+                    LOG.log(Level.FINE, "getTriggers " + addJob(job.getName(), job.getShortUrl(), trigger.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.FINE, "getTriggers is empty");
+            }
+
             // TODO: Query Properties
             if (job.getProperties() !=null && job.getProperties().size() > 0){
                 LOG.log(Level.FINE, "getProperties is " + job.getProperties().size());
