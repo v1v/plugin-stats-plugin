@@ -6,6 +6,7 @@ import hudson.matrix.MatrixProject;
 import hudson.model.*;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Publisher;
+import hudson.triggers.Trigger;
 import hudson.util.DescribableList;
 import jenkins.model.Jenkins;
 import org.jenkins.ci.plugins.pluginstats.model.InstalledPlugin;
@@ -84,6 +85,16 @@ public final class PluginStatsAction implements RootAction {
                 LOG.log(Level.FINE, "getScm " + addJob(job.getName(), job.getShortUrl(), job.getScm().getClass(), installedPluginSet));
             } else {
                 LOG.log(Level.FINE, "getScm is empty");
+            }
+
+            if (job.getTriggers() != null && job.getTriggers().size() > 0) {
+                Iterator<Trigger> triggerIterator =  job.getTriggers().values().iterator();
+                while (triggerIterator.hasNext()) {
+                    Trigger trigger = triggerIterator.next();
+                    LOG.log(Level.FINE, "getTriggers " + addJob(job.getName(), job.getShortUrl(), trigger.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.FINE, "getTriggers is empty");
             }
 
             if (job.getProperties() !=null && job.getProperties().size() > 0){
