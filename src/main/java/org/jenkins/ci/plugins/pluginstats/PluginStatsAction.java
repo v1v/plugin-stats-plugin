@@ -1,5 +1,6 @@
 package org.jenkins.ci.plugins.pluginstats;
 
+import com.github.mjdetullio.jenkins.plugins.multibranch.FreeStyleMultiBranchProject;
 import hudson.Extension;
 import hudson.PluginWrapper;
 import hudson.matrix.MatrixProject;
@@ -256,6 +257,57 @@ public final class PluginStatsAction implements RootAction {
         }
     }
 
+    private void queryMultibranchProject(FreeStyleMultiBranchProject job, Hashtable<String, InstalledPlugin> installedPluginSet) {
+        if (job != null) {
+            if (job.getPublishersList() != null && job.getPublishersList().size() > 0) {
+                DescribableList<Publisher, Descriptor<Publisher>> publisherList = job.getPublishersList();
+                Iterator<Publisher> publisherIterator = publisherList.iterator();
+                while (publisherIterator.hasNext()) {
+                    Publisher publisher = publisherIterator.next();
+                    LOG.log(Level.FINE, "getPublishersList " + addJob(job.getName(), job.getShortUrl(), publisher.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.FINE, "getPublishersList is empty");
+            }
+
+            if (job.getScm() != null) {
+                LOG.log(Level.FINE, "getScm " + addJob(job.getName(), job.getShortUrl(), job.getScm().getClass(), installedPluginSet));
+            } else {
+                LOG.log(Level.FINE, "getScm is empty");
+            }
+
+            if (job.getTriggers() != null && job.getTriggers().size() > 0) {
+                Iterator<Trigger<?>> triggerIterator =  job.getTriggers().values().iterator();
+                while (triggerIterator.hasNext()) {
+                    Trigger trigger = triggerIterator.next();
+                    LOG.log(Level.FINE, "getTriggers " + addJob(job.getName(), job.getShortUrl(), trigger.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.FINE, "getTriggers is empty");
+            }
+
+            if (job.getProperties() !=null && job.getProperties().size() > 0){
+                Map<JobPropertyDescriptor, JobProperty<? super FreeStyleProject>> properties = job.getProperties();
+                for (Map.Entry<JobPropertyDescriptor, JobProperty<? super FreeStyleProject>> entry : properties.entrySet()) {
+                    LOG.log(Level.FINE, "getProperties " + addJob(job.getName(), job.getShortUrl(), entry.getKey().getClass(), installedPluginSet));
+                }
+            }else {
+                LOG.log(Level.FINE, "getProperties is empty");
+            }
+
+            if (job.getAllActions() != null && job.getAllActions().size() > 0) {
+                for (Action action : job.getAllActions()) {
+                    LOG.log(Level.FINE, "getAllActions " + addJob(job.getName(), job.getShortUrl(), action.getClass(), installedPluginSet));
+                }
+            } else {
+                LOG.log(Level.FINE, "getAllActions is empty");
+            }
+
+        } else {
+            LOG.log(Level.FINE, "PROJECT is null");
+        }
+    }
+
     private Hashtable<String, InstalledPlugin> generateInstalledPluginSet (List<PluginWrapper> pluginList, int numberOfJobs) {
         if (pluginList != null) {
             Hashtable<String, InstalledPlugin> installedPluginSet = new Hashtable<String, InstalledPlugin>();
@@ -298,6 +350,12 @@ public final class PluginStatsAction implements RootAction {
         for (MavenModuleSet job : Jenkins.getInstance().getAllItems(MavenModuleSet.class)) {
             LOG.log(Level.FINE, "queryJob " + job);
             queryMavenProject(job, installedPluginSet);
+        }
+
+        // Query FreeStyleMultiBranchProject
+        for (FreeStyleMultiBranchProject job : Jenkins.getInstance().getAllItems(FreeStyleMultiBranchProject.class)) {
+            LOG.log(Level.FINE, "queryJob " + job);
+            queryMultibranchProject(job, installedPluginSet);
         }
 
         for (InstalledPlugin installedPlugin : installedPluginSet.values()){
