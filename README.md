@@ -10,7 +10,7 @@ See [Plugin Stats Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Plugin+Sta
 TODO
 ----
 
-- Job types: maven2-moduleset and FeatureBranch
+- Support Properties plugins
 - Disable Plugin from Table
 - Classify plugins type
 
